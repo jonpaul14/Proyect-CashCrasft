@@ -1,0 +1,77 @@
+<app-header [isModal]="true" title="Agregar Tarjeta"></app-header>
+<ion-content>
+
+  <form [formGroup]="form" class="ion-padding ion-text-center" (ngSubmit)="submit()" (keypress.enter)="submit()">
+
+    <!--==============Agregar Numero de Tarjeta==============-->
+    <app-custom-input autocomplet="numeroTarjeta" icon="person-outline" type="text" label="Numero Tarjeta"
+      [control]="form.controls.numeroTarjeta">
+
+    </app-custom-input>
+    <div class="validators" *ngIf="form.controls.numeroTarjeta && form.controls.numeroTarjeta.touched">
+      <div *ngIf="form.controls.numeroTarjeta.errors?.['required']">El Numero Tarjeta es necesario</div>
+      <div *ngIf="form.controls.numeroTarjeta.errors?.['min']">El Numero Tarjeta debe tener almenos 16 número</div>
+
+    </div>
+
+    <!--Agregar Nombre del Banco-->
+
+    <app-custom-input autocomplet="Banco" icon="person-outline" type="text" label="Nombre del Banco"
+      [control]="form.controls.banco">
+
+    </app-custom-input>
+    <div class="validators" *ngIf="form.controls.banco && form.controls.banco.touched">
+      <div *ngIf="form.controls.banco.errors?.['required']">El Nombre del Banco es necesario</div>
+      <div *ngIf="form.controls.banco.errors?.['minLength']">El nombre debe tener almenos 4 caracteres</div>
+
+    </div>
+
+    <!--=============================== Ingresar CVV ===========================-->
+    <app-custom-input autocomplet="cvv" icon="person-outline" type="text" label="Ingresar CVV"
+      [control]="form.controls.cvv">
+
+    </app-custom-input>
+    <div class="validators" *ngIf="form.controls.cvv && form.controls.cvv.touched">
+      <div *ngIf="form.controls.cvv.errors?.['required']">El CVV es necesario</div>
+      <div *ngIf="form.controls.cvv.errors?.['min']">El CVV debe tener almenos 3 caracteres</div>
+
+    </div>
+
+    <!-- Ingresar Fecha Vencimiento-->
+
+    <app-custom-input autocomplet="fechVenc" icon="person-outline" type="text" label="Fecha Venc"
+      [control]="form.controls.fechVenc">
+
+    </app-custom-input>
+    <div class="validators" *ngIf="form.controls.fechVenc && form.controls.fechVenc.touched">
+      <div *ngIf="form.controls.fechVenc.errors?.['required']">La Fecha de Vencimiento es necesario</div>
+      <div *ngIf="form.controls.fechVenc.errors?.['minLength']">La fecha de Vencimiento debe tener almenos 6 caracteres
+      </div>
+
+    </div>
+
+    <!--Ingresar el Tipo de Tarjeta-->
+
+    <app-custom-input autocomplet="Tipo de Tarjeta" icon="person-outline" type="text" label="Tipo de Tarjeta"
+      [control]="form.controls.tipo">
+
+    </app-custom-input>
+    <div class="validators" *ngIf="form.controls.tipo && form.controls.tipo.touched">
+      <div *ngIf="form.controls.tipo.errors?.['required']">El Tipo de tarjeta es necesario</div>
+      <div *ngIf="form.controls.tipo.errors?.['minLength']">El tipo de tarjeta debe tener almenos 4 caracteres</div>
+
+    </div>
+
+
+    <!--===============================BTN SIGN-UP=======================================-->
+
+    <ion-button routerLink="auth" mode="ios" class="ion-margin" type="submit" [disabled]="form.invalid">
+      Agregar Tarjeta
+      <ion-icon slot="end" name="checkmark-circle-outline"></ion-icon>
+    </ion-button>
+
+
+  </form>
+
+
+</ion-content>

@@ -1,0 +1,48 @@
+<app-header title="Home"></app-header>
+
+<ion-content [fullscreen]="true">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-card *ngIf="tarjetas.length > 0">
+
+    <ion-card-header>
+      <ion-card-title>Tarjetas</ion-card-title>
+
+    </ion-card-header>
+    <ion-card-content>
+
+      <ion-list>
+        <ion-item *ngFor="let tarjeta of tarjetas" (click)="viewGastos(tarjeta)">
+          <img class="tarjeta" src="./assets/icon/tarjeta.png">
+          <ion-label>
+            <p>{{ tarjeta.banco }}</p>
+            <p>{{ tarjeta.numeroTarjeta }}</p>
+            <p>{{ tarjeta.tipo }}</p>
+          </ion-label>
+
+          <ion-button slot="end" color="danger" (click)="confirmDeleteTarjeta(tarjeta)">
+            <ion-icon name="trash"></ion-icon>
+          </ion-button>
+        </ion-item>
+      </ion-list>
+      <ion-button mode="ios" class="left" type="submit" (click)="addUpdateTarjeta()">
+        Agregar Tarjeta
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="tarjetas.length === 0">
+    <ion-card-header>
+      <ion-card-title>No hay tarjetas</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-button expand="block" mode="ios" (click)="addUpdateTarjeta()">
+        Agregar Tarjeta
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>
