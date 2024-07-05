@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Buscar Tarjetas</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismissModal()">
+        <ion-icon slot="icon-only" name="close" color="light"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-item>
+    <ion-label>Tipo de Tarjeta</ion-label>
+    <ion-select [formControl]="searchControl" placeholder="Seleccionar tipo">
+      <ion-select-option value="Visa">Visa</ion-select-option>
+      <ion-select-option value="MasterCard">MasterCard</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-list *ngIf="tarjetas.length > 0">
+    <ion-item *ngFor="let tarjeta of tarjetas" (click)="selectTarjeta(tarjeta)">
+      <ion-label>
+        <h2>{{ tarjeta.numeroTarjeta }}</h2>
+        <p>{{ tarjeta.banco }}</p>
+        <p>{{ tarjeta.tipo }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-spinner *ngIf="loading"></ion-spinner>
+</ion-content>

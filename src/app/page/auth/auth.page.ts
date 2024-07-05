@@ -3,6 +3,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { User } from 'src/app/models/user.model';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import { UtilsService } from 'src/app/services/utils.service';
+import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
+
 
 @Component({
   selector: 'app-auth',
@@ -13,7 +15,7 @@ export class AuthPage implements OnInit {
 
   form = new FormGroup({
     email: new FormControl('', [Validators.email, Validators.required]),
-    password: new FormControl('', [Validators.required])
+    password: new FormControl('', [Validators.required,noWhitespaceValidator(),minLengthValidator(6)])
   })
   constructor() { }
   firebaseSvc = inject(FirebaseService);
@@ -85,4 +87,18 @@ export class AuthPage implements OnInit {
     }
   }
 
+}
+export function noWhitespaceValidator(): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+    const isWhitespace = (control.value || '').toString().trim().length !== control.value.length;
+    const isValid = !isWhitespace;
+    return isValid ? null : { 'whitespace': true };
+  };
+  
+}
+export function minLengthValidator(minLength: number): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+    const isValid = (control.value || '').toString().length >= minLength;
+    return isValid ? null : { 'minLength': { requiredLength: minLength } };
+  };
 }

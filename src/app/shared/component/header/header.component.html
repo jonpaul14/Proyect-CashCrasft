@@ -1,13 +1,12 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button *ngIf="backButton" [defaultHref]="backButton"></ion-back-button>
-      <ion-button (click)="dismissModal()" *ngIf="isModal">
-        <ion-icon name="close-circle-outline"></ion-icon>
+      <ion-back-button *ngIf="backButton" [defaultHref]="backButton" color="light"></ion-back-button>
+      <ion-button (click)="dismissModal()" *ngIf="isModal" color="light">
+        <ion-icon name="close-circle-outline" ></ion-icon>
       </ion-button>
 
-
-      <ion-menu-button *ngIf="showMenu" menu="menu-content"></ion-menu-button>
+      <ion-menu-button *ngIf="showMenu" menu="menu-content" color="light"></ion-menu-button>
 
 
     </ion-buttons>
@@ -16,5 +15,10 @@
       <strong>{{title}}</strong>
       <div class="admin">A D M I N </div>
     </ion-title>
+    <ion-buttons slot="end">
+      <ion-button *ngIf="showMenu" (click)="openSearchModal()">
+        <ion-icon slot="icon-only" name="search-outline" color="light"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>

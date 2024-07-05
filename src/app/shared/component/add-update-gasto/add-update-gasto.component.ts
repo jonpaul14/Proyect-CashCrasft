@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, inject } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { User } from 'firebase/auth';
 import { Gasto } from 'src/app/models/gasto.model';
 import { FirebaseService } from 'src/app/services/firebase.service';
@@ -14,12 +14,14 @@ export class AddUpdateGastoComponent implements OnInit {
 
   @Input() gasto: Gasto;
   @Input() tarjetaId: string;
+  @Input() capacidadTarjeta: number;
 
   form = new FormGroup({
     id: new FormControl(""),
     nombreCategoria: new FormControl("", [Validators.minLength(4), Validators.required]),
     descripcion: new FormControl('', [Validators.minLength(4), Validators.required]),
-    presupuesto: new FormControl(null, [Validators.min(3), Validators.required]),
+    presupuesto: new FormControl(null, [Validators.required, Validators.min(0)]), // Modificado validator de mínimo
+    fechaReg: new FormControl(null, [Validators.required, this.dateValidator]), // Añadido validator de fecha
   });
 
   firebaseSvc = inject(FirebaseService);
@@ -35,8 +37,11 @@ export class AddUpdateGastoComponent implements OnInit {
         id: this.gasto.id,
         nombreCategoria: this.gasto.nombreCategoria,
         descripcion: this.gasto.descripcion,
-        presupuesto: this.gasto.presupuesto
+        presupuesto: +this.gasto.presupuesto,
+        fechaReg: this.gasto.fechaReg || new Date().toISOString().split('T')[0] // Añadir fecha actual si no está definido
       });
+    } else {
+      this.form.patchValue({ fechaReg: new Date().toISOString().split('T')[0] }); // Establecer la fecha actual en nuevos gastos
     }
   }
 
@@ -52,7 +57,7 @@ export class AddUpdateGastoComponent implements OnInit {
     const loading = await this.utilsSvc.loading();
     await loading.present();
 
-    const newGasto = { ...this.form.value };
+    const newGasto = { ...this.form.value, presupuesto: +this.form.value.presupuesto };
     delete newGasto.id;
 
     this.firebaseSvc.addDocument(path, newGasto).then(async () => {
@@ -73,11 +78,11 @@ export class AddUpdateGastoComponent implements OnInit {
   }
 
   async updateGasto() {
-    const path = `users/${this.user.uid}/tarjetas/${this.tarjetaId}/gastos/${this.gasto.id}`;
+    const path = `users/${this.user.uid}/tarjetas/${this.gasto.id}`;
     const loading = await this.utilsSvc.loading();
     await loading.present();
 
-    const updatedGasto = { ...this.form.value };
+    const updatedGasto = { ...this.form.value, presupuesto: +this.form.value.presupuesto };
     delete updatedGasto.id;
 
     this.firebaseSvc.updateDocument(path, updatedGasto).then(async () => {
@@ -96,4 +101,19 @@ export class AddUpdateGastoComponent implements OnInit {
       loading.dismiss();
     });
   }
+
+  // Validator para asegurar que la fecha no sea menor a la actual
+  dateValidator(control: AbstractControl): ValidationErrors | null {
+    const inputDate = new Date(control.value);
+    const currentDate = new Date();
+    currentDate.setHours(0, 0, 0, 0); // Asegurar que se compara solo la fecha sin la hora
+    return inputDate >= currentDate ? null : { invalidDate: true };
+  }
+}
+
+export function capacidadTarjetaValidator(capacidad: number): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+    const presupuesto = control.value;
+    return presupuesto <= capacidad ? null : { capacidadExcedida: true };
+  };
 }

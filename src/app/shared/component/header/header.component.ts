@@ -1,5 +1,6 @@
 import { Component, Input, OnInit, inject, input } from '@angular/core';
 import { UtilsService } from 'src/app/services/utils.service';
+import { SearchTarjetasComponent } from '../search-tarjetas/search-tarjetas.component';
 
 @Component({
   selector: 'app-header',
@@ -19,6 +20,13 @@ export class HeaderComponent implements OnInit {
 
   dismissModal() {
     this.utilsSvc.demisseModal();
+  }
+  async openSearchModal() {
+    const modal = await this.utilsSvc.presenModal({
+      component: SearchTarjetasComponent,
+      cssClass: 'search-modal'
+    });
+    return await modal.present();
   }
 
 }

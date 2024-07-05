@@ -1,0 +1,29 @@
+ion-item {
+    font-size: 14px;
+    color: var(--ion-color-light);
+    --background:#007168;
+
+    ion-icon {
+        color: var(--ion-color-light);
+    }
+
+    &.active {
+        color: var(--ion-color-warning);
+
+        ion-icon {
+            color: var(--ion-color-warning);
+        }
+    }
+
+}
+
+h4 {
+    margin-top: 5px;
+    font-weight: bold;
+    margin-left: 46%;
+}
+
+.avatar-icon {
+    font-size: 100px;
+    margin-left: 46%;
+}

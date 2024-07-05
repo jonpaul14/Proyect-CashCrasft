@@ -22,7 +22,11 @@ const routes: Routes = [
       },
 
     ]
+  },  {
+    path: 'search-tarjetas',
+    loadChildren: () => import('./search-tarjetas/search-tarjetas.module').then( m => m.SearchTarjetasPageModule)
   },
+
 
 
 

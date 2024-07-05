@@ -25,12 +25,11 @@
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
 
-ion-button {
-    text-transform: none;
-}
+
 
 ion-toolbar {
-    --background: #0568fd
+    --background:#007168 ;
+    color:#e0e0e0
 }
 
 // safe padding for ios
@@ -41,6 +40,7 @@ ion-toolbar {
 
 .submit {
     margin-top: 40px;
+    
 }
 
 .empty {

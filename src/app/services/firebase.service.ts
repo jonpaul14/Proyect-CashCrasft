@@ -6,6 +6,8 @@ import { AngularFirestore } from '@angular/fire/compat/firestore'
 import { getFirestore, setDoc, doc, getDoc, addDoc, collection, collectionData, query, updateDoc, deleteDoc } from '@angular/fire/firestore'
 import { UtilsService } from './utils.service';
 import { deleteObject, getStorage, ref } from "firebase/storage";
+import { Observable, map } from 'rxjs';
+import { Tarjeta } from '../models/tarjeta.model';
 
 @Injectable({
   providedIn: 'root'
@@ -41,11 +43,30 @@ export class FirebaseService {
   sendRecoveryEmail(email: string) {
     return sendPasswordResetEmail(getAuth(), email)
   }
+  getDocumentData(path: string) {
+    return this.fireStore.doc(path).valueChanges();
+  }
 
 
   //============== DATA BASE =============================
 
+  checkCardNumberExists(userId: string, cardNumber: number): Observable<boolean> {
+    return this.fireStore.collection(`users/${userId}/tarjetas`, ref => ref.where('numeroTarjeta', '==', cardNumber))
+      .valueChanges().pipe(
+        map(tarjetas => tarjetas.length > 0)
+      );
+  }
 
+  getTarjetasByTipo(userId: string, tipo: string): Observable<Tarjeta[]> {
+    return this.fireStore.collection<Tarjeta>(`users/${userId}/tarjetas`, ref => ref.where('tipo', '==', tipo))
+      .snapshotChanges().pipe(
+        map(actions => actions.map(a => {
+          const data = a.payload.doc.data() as Tarjeta;
+          const id = a.payload.doc.id;
+          return { id, ...data };
+        }))
+      );
+  }
 
   //============== OBtener Documento de la colección======
 

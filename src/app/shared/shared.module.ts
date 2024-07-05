@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddUpdateTarjetaComponent } from './component/add-update-tarjeta/add-update-tarjeta.component';
 import { AddUpdateGastoComponent } from './component/add-update-gasto/add-update-gasto.component';
+import { SearchTarjetasComponent } from './component/search-tarjetas/search-tarjetas.component';
 
 
 
@@ -17,6 +18,7 @@ import { AddUpdateGastoComponent } from './component/add-update-gasto/add-update
     CustomInputComponent,
     AddUpdateTarjetaComponent,
     AddUpdateGastoComponent,
+    SearchTarjetasComponent
   ],
   exports: [
     HeaderComponent,
@@ -24,7 +26,9 @@ import { AddUpdateGastoComponent } from './component/add-update-gasto/add-update
     CustomInputComponent,
     ReactiveFormsModule,
     AddUpdateTarjetaComponent,
-    AddUpdateGastoComponent
+    AddUpdateGastoComponent,
+    SearchTarjetasComponent,
+  
   ],
   imports: [
     CommonModule,

@@ -1,0 +1,86 @@
+.regcard {
+    text-transform: none;
+    background-color:#008737 ;
+    color: #e0e0e0;
+    border-radius: 15px;
+}
+img{
+    margin-top: 40px;
+    size: 150px;
+}
+.card-preview {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    margin-top: 20px;
+  }
+  
+  .credit-card {
+    width: 320px;
+    height: 190px;
+    border-radius: 10px;
+    background: rgb(2,0,36);
+    background: linear-gradient(180deg, rgba(2,0,36,1) 0%, rgba(46,182,193,1) 49%, rgba(2,0,36,1) 100%);
+    color: #fff;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    font-family: 'Arial', sans-serif;
+    position: relative;
+  }
+  
+  .credit-card__front {
+    position: relative;
+    height: 100%;
+    width: 100%;
+  }
+  
+  .credit-card__logo {
+    position: absolute;
+    top: 20px;
+    right: 5px;
+  }
+  
+  .credit-card__logo img {
+    width: 60px;
+  }
+  
+  .credit-card__number {
+    margin-top: 60px;
+    font-size: 20px;
+    letter-spacing: 2px;
+  }
+  
+  .credit-card__details {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+  .credit-card__holder,
+  .credit-card__expiry {
+    text-align: left;
+  }
+  
+  .credit-card__holder label,
+  .credit-card__expiry label {
+    font-size: 12px;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+    display: block;
+  }
+  
+  .credit-card__holder div,
+  .credit-card__expiry div {
+    font-size: 16px;
+  }
+  
+  .credit-card__chip {
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    width: 50px;
+    height: 35px;
+    background: url('/assets/icon/chip.png') no-repeat center center / contain; /* Coloca aquí una imagen de chip si tienes */
+    border-radius: 5px;
+  }
+  

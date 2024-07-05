@@ -3,6 +3,7 @@ export interface Gasto {
     nombreCategoria: string,
     descripcion: string,
     presupuesto: number,
-    id: string
+    id: string,
+    fechaReg:Date
 
 }

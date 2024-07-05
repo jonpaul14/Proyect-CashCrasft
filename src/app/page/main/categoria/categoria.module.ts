@@ -5,6 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import { CategoriaPageRoutingModule } from './categoria-routing.module';
 import { CategoriaPage } from './categoria.page';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { NgApexchartsModule } from 'ng-apexcharts';
 
 @NgModule({
   imports: [
@@ -12,7 +13,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
     FormsModule,
     IonicModule,
     CategoriaPageRoutingModule,
-    SharedModule
+    SharedModule,
+    NgApexchartsModule,
   ],
   declarations: [CategoriaPage]
 })

@@ -2,26 +2,40 @@
 
 <ion-content [fullscreen]="true">
 
-
-  <ion-card *ngIf="gastos.length > 0">
+    
+  
+    <ion-card mode="ios" id="saldoRestante" class="d-flex-center ion-text-center" >
+      <div>
+        <h5> Saldo Restante: s/.{{saldoRestante}}</h5>
+      </div>
+    </ion-card>
+    <div>
+      <canvas id="myChart" width="400" height="200"></canvas>
+    </div>
+    <ion-card *ngIf="gastos.length > 0">
     <ion-card-header>
+
       <ion-card-title>Gastos</ion-card-title>
     </ion-card-header>
     <ion-card-content>
+      
       <ion-list>
+
+        
         <ion-item *ngFor="let gasto of gastos">
-          <img class="tarjeta" src="./assets/icon/gastando-dinero.png">
+          <span class="arcticons--expense-register"></span>
           <ion-label>
             <p>{{ gasto.nombreCategoria }}</p>
             <p>{{ gasto.descripcion }}</p>
             <p>s/. {{ gasto.presupuesto }}</p>
+            <p>{{ gasto.fechaReg }}</p>
           </ion-label>
           <ion-button slot="end" color="danger" (click)="confirmDeleteGasto(gasto)">
             <ion-icon name="trash"></ion-icon>
           </ion-button>
         </ion-item>
       </ion-list>
-      <ion-button expand="block" (click)="addUpdateGasto()">
+      <ion-button expand="block" (click)="addUpdateGasto()" color="transparent">
         Agregar Gasto
       </ion-button>
     </ion-card-content>
@@ -32,7 +46,7 @@
       <ion-card-title>No hay gastos</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <ion-button expand="block" (click)="addUpdateGasto()">
+      <ion-button expand="block" (click)="addUpdateGasto()" color="transparent">
         Agregar Gasto
       </ion-button>
     </ion-card-content>

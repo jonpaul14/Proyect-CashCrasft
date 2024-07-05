@@ -4,6 +4,46 @@
 }
 
 .left {
-    margin-left: 100px;
+    margin-left: 30%;
     margin-top: 20px;
+    
 }
+
+
+ion-button {
+    text-transform: none;
+    background-color:#008737 ;
+    color: #e0e0e0;
+    border-radius: 15px;
+}
+ion-list{
+    margin-left: -30px;
+}
+
+.cap{
+    font-size: 20px;
+    font-weight: bold;
+    color: black;
+    
+}
+// <uniquifier>: Use a unique and descriptive class name
+// <weight>: Use a value from 200 to 700
+
+.oswald-bold {
+    font-family: "Roboto", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 1000;
+    font-style: normal;
+    hyphens: 1px;
+    font-size: 25px;
+    color: black;
+    margin-left: 30%;
+  }
+
+  .position{
+    margin-left: 20%;
+  }
+
+
+  
+    

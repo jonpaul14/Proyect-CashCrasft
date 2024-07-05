@@ -5,6 +5,7 @@ import { FirebaseService } from 'src/app/services/firebase.service';
 import { UtilsService } from 'src/app/services/utils.service';
 import { AddUpdateTarjetaComponent } from 'src/app/shared/component/add-update-tarjeta/add-update-tarjeta.component';
 import { Router } from '@angular/router';
+import { SearchTarjetasComponent } from 'src/app/shared/component/search-tarjetas/search-tarjetas.component';
 
 @Component({
   selector: 'app-home',
@@ -69,6 +70,20 @@ export class HomePage implements OnInit {
     if (success) this.getTarjetas();
   }
 
+  async openSearchModal() {
+    const modal = await this.utilsSvc.presenModal({
+      component: SearchTarjetasComponent,
+      cssClass: 'search-modal'
+    });
+    modal.onDidDismiss().then((detail) => {
+      if (detail.data) {
+        this.viewGastos(detail.data);
+      }
+    });
+
+    return await modal.present();
+  }
+
   // Método para confirmar la eliminación de una tarjeta
   async confirmDeleteTarjeta(tarjeta: Tarjeta) {
     this.utilsSvc.presentAlert({
@@ -114,5 +129,9 @@ export class HomePage implements OnInit {
   // Método para navegar a la página de gastos de una tarjeta específica
   viewGastos(tarjeta: Tarjeta) {
     this.router.navigate(['./main/categoria', { tarjetaId: tarjeta.id }]);
+  }
+
+  goToSearch() {
+    this.router.navigate(['/search-tarjetas']);
   }
 }

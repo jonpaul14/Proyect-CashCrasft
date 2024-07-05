@@ -1,48 +1,55 @@
-<app-header [isModal]="true" title="Agregar Tarjeta"></app-header>
+<app-header [isModal]="true" title="Agregar Gasto"></app-header>
 <ion-content>
 
   <form [formGroup]="form" class="ion-padding ion-text-center" (ngSubmit)="submit()" (keypress.enter)="submit()">
 
     <!--==============Agregar Nombre de Gasto ==============-->
-    <app-custom-input autocomplet="nombreCategoria" icon="person-outline" type="text" label="Nombre Categoria"
+    <app-custom-input autocomplet="nombreCategoria" icon="car" type="text" label="Nombre Categoria"
       [control]="form.controls.nombreCategoria">
 
     </app-custom-input>
     <div class="validators" *ngIf="form.controls.nombreCategoria && form.controls.nombreCategoria.touched">
-      <div *ngIf="form.controls.nombreCategoria.errors?.['required']">El Numero Tarjeta es necesario</div>
-      <div *ngIf="form.controls.nombreCategoria.errors?.['minLength']">El Numero Tarjeta debe tener almenos 16 número
+      <div *ngIf="form.controls.nombreCategoria.errors?.['required']">El Nombre de la categoria es necesario</div>
+      <div *ngIf="form.controls.nombreCategoria.errors?.['minLength']">La descripcion debe tener almenos 4 caracteres
       </div>
 
     </div>
 
     <!--Agregar Descripción-->
 
-    <app-custom-input autocomplet="Descripcion" icon="person-outline" type="text" label="Descripción"
+    <app-custom-input autocomplet="Descripcion" icon="list" type="text" label="Descripción"
       [control]="form.controls.descripcion">
 
     </app-custom-input>
     <div class="validators" *ngIf="form.controls.descripcion && form.controls.descripcion.touched">
-      <div *ngIf="form.controls.descripcion.errors?.['required']">El Nombre del Banco es necesario</div>
-      <div *ngIf="form.controls.descripcion.errors?.['minLength']">El nombre debe tener almenos 4 caracteres</div>
+      <div *ngIf="form.controls.descripcion.errors?.['required']">La descripción es necesaria es necesario</div>
+      <div *ngIf="form.controls.descripcion.errors?.['minLength']">El Descripción debe tener almenos 4 caracteres</div>
 
     </div>
 
-    <!--=============================== Ingresar CVV ===========================-->
-    <app-custom-input autocomplet="cvv" icon="person-outline" type="text" label="Ingresar presupuesto"
+    <!--=============================== Ingresar Presupuesto ===========================-->
+    <app-custom-input autocomplet="cvv" icon="cash" type="number" label="Ingresar presupuesto"
       [control]="form.controls.presupuesto">
 
     </app-custom-input>
     <div class="validators" *ngIf="form.controls.presupuesto && form.controls.presupuesto.touched">
-      <div *ngIf="form.controls.presupuesto.errors?.['required']">El CVV es necesario</div>
-      <div *ngIf="form.controls.presupuesto.errors?.['min']">El CVV debe tener almenos 3 caracteres</div>
+      <div *ngIf="form.controls.presupuesto.errors?.['required']">El presupuesto es necesario</div>
+      <div *ngIf="form.controls.presupuesto.errors?.['min']">El presupuesto debe ser mayor o igual a cero.</div>
 
     </div>
 
-
-
+     <!--=============================== Fecha de Registro ===========================-->
+     <app-custom-input autocomplet="fechaReg" icon="calendar" type="date" label="Fecha de Registro" color="success"
+     [control]="form.controls.fechaReg" disabled="true">
+   </app-custom-input>
+   <div class="validators" *ngIf="form.controls.fechaReg && form.controls.fechaReg.touched">
+     <div *ngIf="form.controls.fechaReg.errors?.['required']">La Fecha de Registro es necesaria</div>
+     <div *ngIf="form.controls.fechaReg.errors?.['dateValidator']">La Fecha de Registro es necesaria</div>
+   </div>
+   
 
     <!--===============================BTN SIGN-UP=======================================-->
-    <ion-button routerLink="auth" mode="ios" class="ion-margin" type="submit" [disabled]="form.invalid">
+    <ion-button routerLink="auth" mode="ios" class="ion-margin" type="submit" [disabled]="form.invalid" color="transparent">
       Agregar Gasto
       <ion-icon slot="end" name="checkmark-circle-outline"></ion-icon>
     </ion-button>

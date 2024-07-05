@@ -6,6 +6,7 @@ export interface Tarjeta {
     numeroTarjeta: number,
     fechVenc: string,
     tipo: string,
-    id: string
+    id: string,
+    capacidad:number
 
 }
